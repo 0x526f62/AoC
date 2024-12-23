@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.23)
+project(AoC)
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD CXX20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_subdirectory(include)
+add_subdirectory(2015)
