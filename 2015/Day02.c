@@ -44,7 +44,7 @@ static int findArea(int a, int b, int c) {
 // main program definition, will take a parameter for the file name
 int main(int argc, char const *argv[]) {
   // sanity check the command arguments
-  if (argc != 2) {
+if (argc != 2) {
     printf("Usage: Day02 <filename>\n");
     return 1;
   } else {
@@ -59,7 +59,7 @@ int main(int argc, char const *argv[]) {
       long seekcount = ftell(fp);
       fseek(fp, 0, SEEK_SET);
       // allocate a context arena based on the cast to size_t of count
-      char *buffer = context_alloc(seekcount * 2);
+      char *buffer = context_alloc(seekcount );
       int totalarea = 0;
       int totalribon = 0;
       while (fgets(buffer, seekcount, fp) != NULL) {

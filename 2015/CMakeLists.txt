@@ -1,12 +1,13 @@
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
-add_executable(2015-Day01 Day01.c "Day01.c" "Day03.c")
-set(DAY01_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Day01Input.txt")
-add_custom_command(TARGET 2015-Day01 POST_BUILD COMMAND ${CMAKE_COMMAND} -E echo "====== Running 2015-Day01 ======")
-add_custom_command(TARGET 2015-Day01 POST_BUILD COMMAND 2015-Day01 ${DAY01_FILE} COMMENT "Running 2015-Day01.exe")
+file(GLOB DAY_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.c")
 
-add_executable(2015-Day02 Day02.c "Day02.c" "Day03.c")
-set(DAY02_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Day02Input.txt")
-add_custom_command(TARGET 2015-Day02 POST_BUILD COMMAND ${CMAKE_COMMAND} -E echo "====== Running 2015-Day02 ======")
-add_custom_command(TARGET 2015-Day02 POST_BUILD COMMAND 2015-Day02 ${DAY02_FILE} )
+foreach(DAY_SOURCE ${DAY_SOURCES})
+get_filename_component(DAY_NAME ${DAY_SOURCE} NAME_WE) 
+add_executable(2015-${DAY_NAME} ${DAY_SOURCE})
+#add_custom_command(TARGET 2015-${DAY_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E echo "====== Running 2015-${DAY_NAME} ======")
+#add_custom_command(TARGET 2015-${DAY_NAME} POST_BUILD COMMAND 2015-${DAY_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/${DAY_NAME}Input.txt" )
+endforeach()
+
+
