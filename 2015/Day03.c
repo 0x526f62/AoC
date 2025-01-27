@@ -38,6 +38,9 @@ static void* context_alloc(size_t size) {
     return arena_alloc(context_arena, size);
 }
 
+#define NOB_IMPLEMENTATION
+#include <nob.h>
+
 typedef struct Buffer Buffer;
 struct Buffer {
     Arena* data;
@@ -46,8 +49,9 @@ struct Buffer {
     size_t* position; 
 };
 
+
 int main(int argc, char const *argv[]) {
-  myfile fp;
+  myfile fp ={0};
   
   Buffer buffer = { 0 };
   buffer.data = context_alloc(0);

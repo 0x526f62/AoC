@@ -642,7 +642,28 @@ static size_t nob_temp_size = 0;
 static char nob_temp[NOB_TEMP_CAPACITY] = {0};
 
 bool nob_mkdir_if_not_exists(const char *path)
-{
+{       char temp[256];
+        char* pos = NULL;
+        size_t len;
+
+        snprintf(temp, sizeof(temp), "%s", path);
+        len = strlen(temp);
+
+        if (temp[len - 1] == '/') {
+            temp[len - 1] = 0;
+        }
+
+        for (pos = temp + 1; *pos; pos++) {
+            if (*pos == '/') {
+                *pos = 0;
+#ifdef _WIN32
+                int result = mkdir(path);
+#else
+                int result = mkdir(path, S_IRWXU);
+#endif
+                *pos = '/';
+            }
+        }
 #ifdef _WIN32
     int result = mkdir(path);
 #else
